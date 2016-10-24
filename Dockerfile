@@ -15,7 +15,7 @@
 FROM python:2.7.10
 MAINTAINER Kirsten Hunter (khunter@akamai.com)
 RUN apt-get update
-RUN apt-get install -y curl patch gawk g++ gcc make libc6-dev patch libreadline6-dev zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 autoconf libgdbm-dev libncurses5-dev automake libtool bison pkg-config libffi-dev
+RUN apt-get install -y curl patch gawk g++ gcc make libc6-dev patch libreadline6-dev zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 autoconf libgdbm-dev libncurses5-dev automake libtool bison pkg-config libffi-dev supervisor
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q curl libssl-dev python-all wget vim python-pip php5 ruby-dev nodejs-dev npm php-pear php5-dev ruby perl5 
 RUN pip install httpie-edgegrid 
 ADD ./examples /opt/examples
@@ -34,4 +34,5 @@ RUN echo "cat /opt/MOTD" >> /root/.bashrc
 RUN mkdir /root/.httpie
 ADD ./config.json /root/.httpie/config.json
 RUN echo "PS1='Akamai API Bootcamp >> '" >> /root/.bashrc
-ENTRYPOINT ["/bin/bash"]
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+ENTRYPOINT ["/usr/bin/supervisord"]
