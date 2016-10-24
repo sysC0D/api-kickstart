@@ -34,5 +34,17 @@ RUN echo "cat /opt/MOTD" >> /root/.bashrc
 RUN mkdir /root/.httpie
 ADD ./config.json /root/.httpie/config.json
 RUN echo "PS1='Akamai API Bootcamp >> '" >> /root/.bashrc
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-ENTRYPOINT ["/usr/bin/supervisord"]
+
+#Add conf supervisor
+COPY src_sysc0d/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+#Add scripts and files
+RUN mkdir /src
+COPY src_sysc0d/ccu_v3.py.example /src/ccu_v3.py.example
+COPY src_sysc0d/fast-purge.sh /src/fast-purge.sh
+COPY src_sysc0d/genere_config.sh /src/genere_config.sh
+
+#Auto launch
+COPY src_sysc0d/entrypoint.sh /entrypoint.sh
+RUN chmod 755 /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]

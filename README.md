@@ -11,20 +11,38 @@ Before start installation for Fast-Purge please read [OPEN API Administration Ap
 ## Source directory
 Create directory to contain client credentials and list url purge :
  - filename "cc.txt" ->  client credentials
- - filename "list_urls" -> liste URL to purge 
-Sample file for list_url : 
-> /index.html
-> /style/style.css
-> /js/
+ - filename "list_urls" -> list URL to purge
+ - filename "config_purge" -> hostname and network 
+Sample file for list_url :
+```/index.html
+/style/style.css
+/js/
+```
+Sample file for config_purge :
+```hostname=your.hostname.com
+network=staging (or production)
+```
 
 ## Launch Docker
 ### Docker line
-`docker run -d /your/path/with/config:/var/local --name api-akamai sysC0D/api-kickstart`   
+`docker run -d -v /your/path/with/config:/var/local --name api-akamai sysC0D/api-kickstart`   
 
 ### Docker-Compose 
-`api-akamai:
+```api-akamai:
  image: "sysC0D/api-kickstart"
  restart: always
  volumes:
- - /your/path/with/config:/var/local:rw`
+ - /your/path/with/config:/var/local:rw
+```
 
+## Configure Docker
+After first launch Docker, your .edgerc is generated automatically -> for more information, please see [doc](https://developer.akamai.com/introduction/Conf_Client.html)
+For verify your configuration, please run :
+`docker exec -it api-akamai python verify_creds.py`
+If you have problem please update your cc.txt and run next commands :
+```docker exec -it api-akamai python gen_edgerc.py -s default -f /var/local/cc.txt
+docker exec -it api-akamai python gen_edgerc.py -s ccu -f /var/local/cc.txt```
+
+##Launch Purge
+Just exec next command, and if you have code 201 this is a success \0/
+`docker exec -it api-akamai /src/fast-purge.sh` 
