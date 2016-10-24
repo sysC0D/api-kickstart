@@ -1,47 +1,30 @@
 api-kickstart
 =============
 
-Examples and libraries to get started using the Akamai {OPEN} APIs
+From Git : [akamai-open/api-kickstart](https://github.com/akamai-open/api-kickstart) 
+This repositarie is only dedicated to Docker and optimize for Fast-Purge in Python  
+Docker api-kickstart can running in background (in next example, initialize with Docker-compose)
 
-Currently, this repository has:
-* Sample code clients for python
-* Sample code clients for php
+Before start installation for Fast-Purge please read [OPEN API Administration Application](https://developer.akamai.com/introduction/Luna_Setup.html) for download Exporting Client Credentials
 
 # Installation
+## Source directory
+Create directory to contain client credentials and list url purge :
+ - filename "cc.txt" ->  client credentials
+ - filename "list_urls" -> liste URL to purge 
+Sample file for list_url : 
+> /index.html
+> /style/style.css
+> /js/
 
-## Python
-``` bash
-$ git clone https://github.com/akamai-open/api-kickstart.git
-$ cd examples/python
-```
-See the [README](examples/python/README.md) in the examples/python directory for additional instructions
+## Launch Docker
+### Docker line
+`docker run -d /your/path/with/config:/var/local --name api-akamai sysC0D/api-kickstart`   
 
-## PHP
-``` bash
-$ git clone https://github.com/akamai-open/api-kickstart.git
-$ cd examples/php
-```
-See the [README](examples/php/README.md) in the examples/php directory for additional instructions
-
-## Node.js
-``` bash
-$ git clone https://github.com/akamai-open/api-kickstart.git
-$ cd examples/node
-$ npm install
-```
-See the [README](examples/node/README.md) in the examples/node directory for additional instructions
-
-# Additional Resources
-We have example applications available for review.
-
-* [PAPI Demo App](https://github.com/akamai-open/papi-demo-app)
-* [Image Manager Demo App](https://github.com/akamai-open/imaging-sample-ui)
-	Note that the Image Manager product is required for this example
-
-# Exploring the API using HTTPie:
-The [Blog Post](https://goo.gl/T4VR10) https://goo.gl/T4VR10 explains how to use HTTPie to access and explore our APIs from the command line
-
-
-
-
+### Docker-Compose 
+`api-akamai:
+ image: "sysC0D/api-kickstart"
+ restart: always
+ volumes:
+ - /your/path/with/config:/var/local:rw`
 
