@@ -45,4 +45,4 @@ docker exec -it api-akamai python gen_edgerc.py -s ccu -f /var/local/cc.txt```
 
 ##Launch Purge
 Just exec next command, and if you have code 201 this is a success \0/
-`docker exec -it api-akamai /src/fast-purge.sh` 
+`docker exec -it api-akamai /src/fast-purge.sh`
