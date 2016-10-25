@@ -38,6 +38,7 @@ network=staging (or production)
  - /your/path/with/config:/var/local:rw
 ```
 
+
 ## Configure Docker
 After first launch Docker, your .edgerc is generated automatically -> for more information, please see [doc](https://developer.akamai.com/introduction/Conf_Client.html)
 For verify your configuration, please run :
@@ -46,6 +47,7 @@ If you have problem please update your cc.txt and run next commands :
 `docker exec -it api-akamai python gen_edgerc.py -s default -f /var/local/cc.txt`
 `docker exec -it api-akamai python gen_edgerc.py -s ccu -f /var/local/cc.txt`
 
-##Launch Purge
+
+## Launch Purge
 Just exec next command, and if you have code 201 this is a success \0/
 `docker exec -it api-akamai /src/fast-purge.sh`
