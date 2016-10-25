@@ -44,7 +44,7 @@ COPY src_sysc0d/ccu_v3.py.example /src/ccu_v3.py.example
 COPY src_sysc0d/fast-purge.sh /src/fast-purge.sh
 COPY src_sysc0d/genere_config.sh /src/genere_config.sh
 
-#Auto launch
+#Exec supervisor and script in background 
 COPY src_sysc0d/entrypoint.sh /entrypoint.sh
 RUN chmod 755 /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
