@@ -13,7 +13,7 @@ fileconfig="/var/local/config_purge"
 hostakamai=`grep "hostname" $fileconfig | sed 's/^.*=//'`
 networkakamai=`grep "network" $fileconfig | sed 's/^.*=//'`
 sed -i -e "s/hostakamai/$hostakamai/g" ccu_v3_custom.py
-sed -i -e "s|/ccu/v3/invalidate/url/network|/ccu/v3/invalidate/$networkakamai|g" ccu_v3_custom.py
+sed -i -e "s|/ccu/v3/invalidate/url/network|/ccu/v3/invalidate/url/$networkakamai|g" ccu_v3_custom.py
 
 #Add URL in file purge
 echo "-> Read URL list for purge file"
