@@ -5,5 +5,5 @@ if [ ! -f /root/.edgerc ]; then
 	/src/genere_config.sh
 fi
 
-# Start Supervisord
+# Start supervisord
 /usr/bin/supervisord
