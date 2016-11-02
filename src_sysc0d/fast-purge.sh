@@ -22,8 +22,11 @@ while read -r line
 do
 	url="$line"
         echo "--> $url"
-listpurgeurl+="\n\t\t\t\t\"$url\","
+listpurge+="\n\t\t\t\t\"$url\","
 done < "$fileurl"
+
+#Add backslash for '&' (if arg in url)
+listpurgeurl=$(sed 's/&/\\&/g' <<< $listpurge)
 
 sed -i -e "s|\"objects\" : \[|\"objects\" : \[ ${listpurgeurl::-1}|g" ccu_v3_custom.py
 
