@@ -57,7 +57,8 @@ if hasattr(config, "verbose") and config.verbose:
 session.auth = EdgeGridAuth(
             client_token=config.client_token,
             client_secret=config.client_secret,
-            access_token=config.access_token
+            access_token=config.access_token,
+            max_body=128*1024
 )
 
 if hasattr(config, 'headers'):
